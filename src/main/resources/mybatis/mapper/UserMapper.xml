@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmgzs.mapper.UserMapper">
+
+    <select id="getUserByUserName" resultType="com.cmgzs.pojo.User">
+        select id, user_name, pass_word
+        from user
+        where user_name = #{username}
+    </select>
+
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+        insert into user(user_name, pass_word)
+        values (#{user.userName}, #{user.passWord})
+    </insert>
+
+</mapper>
