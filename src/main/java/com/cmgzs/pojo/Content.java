@@ -14,7 +14,7 @@ public class Content {
     /**
      * 标签
      */
-    private Tag tag;
+    private Tag tag ;
 
     /**
      * 内容

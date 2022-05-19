@@ -1,5 +1,7 @@
 package com.cmgzs.service;
 
+import com.cmgzs.pojo.Document;
+
 import java.io.File;
 
 public interface LaTexService {
@@ -30,5 +32,12 @@ public interface LaTexService {
      */
     String Compile(String fileName);
 
+    /**
+     * 将Document文档对象整合为代码段，保存编译。
+     *
+     * @param document 文档对象
+     * @return 代码段
+     */
+    String convert(Document document) throws IllegalAccessException;
 
 }

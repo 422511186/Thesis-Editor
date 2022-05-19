@@ -5,18 +5,15 @@ import lombok.Data;
 
 import java.util.ArrayList;
 
-/**
- * 文档类  --  标签
- */
 @Data
-public class Documentclass implements Tag {
-    private final String tagName = "\\documentclass[option]{content} \n";
+public class Usepackage implements Tag {
+    private final String tagName = "\\usepackage[option]{packageName} \n";
     private ArrayList<String> option;
-    private String content;
+    private String packageName;
 
-    public Documentclass(ArrayList<String> option, String content) {
+    public Usepackage(ArrayList<String> option, String packageName) {
         this.option = option;
-        this.content = content;
+        this.packageName = packageName;
     }
 
     /**
@@ -31,6 +28,6 @@ public class Documentclass implements Tag {
             option.forEach(e -> option_str.append(e).append(","));
             option_str.deleteCharAt(option_str.length() - 1);
         }
-        return tagName.replace("option", option_str.toString()).replace("content", content);
+        return tagName.replace("option", option_str.toString()).replace("packageName", packageName);
     }
 }

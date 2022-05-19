@@ -1,6 +1,9 @@
-package com.cmgzs.pojo;
+package com.cmgzs.commons;
 
 import lombok.Data;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 /**
  * 文档排版配置参数
@@ -52,5 +55,38 @@ public class DocumentOption {
      */
     private String oneside;
 
+    /**
+     * 通过反射获取有效参数列表
+     *
+     * @param documentOption 文档排版配置参数对象
+     * @return options 有效参数列表
+     * @throws IllegalAccessException
+     */
+    public static ArrayList<String> getOptionList(DocumentOption documentOption) throws IllegalAccessException {
+        ArrayList<String> options = new ArrayList<>();
+        //对象判空
+        if (documentOption != null) {
+            for (Field field : documentOption.getClass().getDeclaredFields()) {
+                //参数判空
+                if (field.get(documentOption) != null)
+                    options.add(String.valueOf(field.get(documentOption)));
+            }
+        }
+        return options;
+    }
 
+    /**
+     * 测试getOptionList方法
+     *
+     * @param args
+     * @throws IllegalAccessException
+     */
+    public static void main(String[] args) throws IllegalAccessException {
+        DocumentOption option = new DocumentOption();
+        option.setColumn("colum");
+        option.setScape("setScape");
+        option.setPaper_size("setPaper_size");
+        ArrayList<String> list = DocumentOption.getOptionList(option);
+        list.forEach(System.out::println);
+    }
 }
