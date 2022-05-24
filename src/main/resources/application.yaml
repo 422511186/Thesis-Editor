@@ -13,7 +13,7 @@ spring:
       file-size-threshold: 20MB #当文件达到多少时进行磁盘写
   #配置数据库
   datasource:
-    url: jdbc:mysql://${sqlData.url}:3306/dacuan?characterEncoding=UTF-8&&serverTimezone=GMT&&allowMultiQueries=true&&&rewriteBatchedStatements=true&&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://${sqlData.url}:3306/thesis_editor?characterEncoding=UTF-8&&serverTimezone=GMT&&allowMultiQueries=true&&&rewriteBatchedStatements=true&&allowPublicKeyRetrieval=true
     username: ${sqlData.username}
     password: ${sqlData.password}
     driver-class-name: com.mysql.cj.jdbc.Driver

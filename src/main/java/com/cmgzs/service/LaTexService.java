@@ -1,6 +1,7 @@
 package com.cmgzs.service;
 
 import com.cmgzs.pojo.Document;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 

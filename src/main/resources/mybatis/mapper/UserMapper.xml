@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cmgzs.mapper.UserMapper">
 
+
     <select id="getUserByUserName" resultType="com.cmgzs.pojo.User">
         select id, user_name, pass_word
         from user
@@ -13,4 +14,9 @@
         values (#{user.userName}, #{user.passWord})
     </insert>
 
+    <update id="updateUser">
+        update user
+        set pass_word = #{user.passWord}
+        where user_name = #{user.userName}
+    </update>
 </mapper>

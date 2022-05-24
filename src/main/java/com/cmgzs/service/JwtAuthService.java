@@ -30,6 +30,13 @@ public interface JwtAuthService {
     void register(UserParam userParam);
 
     /**
+     * 修改密码
+     *
+     * @param pwd
+     */
+    void updatePWD(String pwd);
+
+    /**
      * 退出登录
      */
     void logout();

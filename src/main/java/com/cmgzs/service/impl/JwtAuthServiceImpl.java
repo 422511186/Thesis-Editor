@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 
 @Service
-@Transactional(rollbackFor = Exception.class)
+@Transactional(rollbackFor = Exception.class)//开启事务
 public class JwtAuthServiceImpl implements JwtAuthService {
 
     @Resource
@@ -97,13 +97,31 @@ public class JwtAuthServiceImpl implements JwtAuthService {
     }
 
     /**
+     * 修改密码
+     *
+     * @param pwd
+     */
+    @Override
+    public void updatePWD(String pwd) {
+        String uname = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = new User();
+        user.setUserName(uname);
+        user.setPassWord(pwd);
+
+        int i = userMapper.updateUser(user);
+        if (i == 0)
+            throw new RuntimeException("修改失败");
+    }
+
+    /**
      * 退出登录
      */
     public void logout() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         //清除上下文容器，返回成功消息
         SecurityContextHolder.clearContext();
-        //TODO 删除缓存中的token，使其失效
+        // 删除缓存中的token，使其失效
         redisTemplate.opsForValue().getAndDelete(RedisKeys.UID_ + username);
     }
+
 }

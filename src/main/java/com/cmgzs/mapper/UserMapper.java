@@ -22,4 +22,12 @@ public interface UserMapper {
      * @return
      */
     int insertUser(@Param("user") User user);
+
+    /**
+     * 修改密码
+     *
+     * @param user
+     * @return
+     */
+    int updateUser(@Param("user") User user);
 }

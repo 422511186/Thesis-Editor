@@ -1,9 +1,10 @@
 package com.cmgzs.api;
 
 import com.cmgzs.api.param.UserParam;
+import com.cmgzs.service.JwtAuthService;
 import com.cmgzs.service.impl.JwtAuthServiceImpl;
 import com.cmgzs.utils.ResultGenerator;
-import org.springframework.util.StringUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ public class JwtAuthController {
 
 
     @Resource
-    private JwtAuthServiceImpl jwtAuthServiceImpl;
+    private JwtAuthService jwtAuthServiceImpl;
 
     /**
      * 登录接口
@@ -27,12 +28,14 @@ public class JwtAuthController {
      * @return
      */
     @PostMapping(value = "/login")
-    public Object login(@RequestBody UserParam userParam) {
+    public Object login(@Validated @RequestBody UserParam userParam) {
         String username = userParam.getUsername();
         String password = userParam.getPassword();
+/*
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
             return ResultGenerator.genFailResult("用户名密码不能为空");
         }
+*/
         try {
             String token = jwtAuthServiceImpl.login(username, password);
             return ResultGenerator.genSuccessResult(new HashMap<>() {{
@@ -44,8 +47,6 @@ public class JwtAuthController {
     }
 
 
-
-
     /**
      * 注册接口
      *
@@ -53,12 +54,12 @@ public class JwtAuthController {
      * @return
      */
     @PostMapping(value = "/register")
-    public Object register(@RequestBody UserParam userParam) {
-        String username = userParam.getUsername();
+    public Object register(@Validated @RequestBody UserParam userParam) {
+   /*     String username = userParam.getUsername();
         String password = userParam.getPassword();
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
             return "用户名密码不能为空";
-        }
+        }*/
         jwtAuthServiceImpl.register(userParam);
         return ResultGenerator.genSuccessResult();
     }
